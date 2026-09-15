@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - BusBuddy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 1000px;
+            min-height: 600px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+        }
+
+        /* =========================
+           LEFT SIDE
+        ========================= */
+
+        .left-section {
+            padding: 55px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: linear-gradient(
+                145deg,
+                rgba(124, 58, 237, 0.75),
+                rgba(37, 99, 235, 0.65)
+            );
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 40px;
+        }
+
+        .left-section h1 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 42px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .left-section p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .bus-icon {
+            font-size: 90px;
+            margin-top: 35px;
+        }
+
+        /* =========================
+           RIGHT SIDE
+        ========================= */
+
+        .right-section {
+            padding: 55px;
+            background: rgba(255, 255, 255, 0.97);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .right-section h2 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 32px;
+            color: #17152d;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            outline: none;
+            transition: 0.3s;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #6d5dfc;
+            box-shadow: 0 0 0 3px rgba(109, 93, 252, 0.12);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #6d5dfc, #4f46e5);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 5px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
+        }
+
+        .login-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .message {
+            display: none;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 18px;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .message.error {
+            display: block;
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .message.success {
+            display: block;
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 22px;
+        }
+
+        .back-link a {
+            color: #5b4ff7;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 750px) {
+
+            .login-container {
+                grid-template-columns: 1fr;
+            }
+
+            .left-section {
+                padding: 35px;
+                text-align: center;
+            }
+
+            .left-section h1 {
+                font-size: 32px;
+            }
+
+            .bus-icon {
+                font-size: 60px;
+                margin-top: 20px;
+            }
+
+            .right-section {
+                padding: 35px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <!-- LEFT SECTION -->
+
+    <div class="left-section">
+
+        <div class="logo">
+            🚌 BusBuddy
+        </div>
+
+        <h1>
+            Your Ride.<br>
+            Your Voice.
+        </h1>
+
+        <p>
+            Report transport problems, track their progress,
+            and help make your college transportation better.
+        </p>
+
+        <div class="bus-icon">
+            🚌
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT SECTION -->
+
+    <div class="right-section">
+
+        <h2>Welcome Back 👋</h2>
+
+        <p class="subtitle">
+            Login to continue to BusBuddy
+        </p>
+
+        <div id="message" class="message"></div>
+
+        <form id="loginForm">
+
+            <!-- USERNAME -->
+
+            <div class="form-group">
+
+                <label for="username">
+                    Username / Student ID
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="Enter your username"
+                    required
+                >
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+            </div>
+
+
+            <!-- ROLE -->
+
+            <div class="form-group">
+
+                <label for="role">
+                    Login As
+                </label>
+
+                <select id="role" required>
+
+                    <option value="">
+                        Select your role
+                    </option>
+
+                    <option value="student">
+                        👨‍🎓 Student
+                    </option>
+
+                    <option value="admin">
+                        👨‍💼 Admin
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- LOGIN BUTTON -->
+
+            <button
+                type="submit"
+                class="login-btn"
+                id="loginBtn"
+            >
+                Login
+            </button>
+
+        </form>
+
+
+        <div class="back-link">
+
+            <a href="index.html">
+                ← Back to BusBuddy
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    const API_URL = "http://127.0.0.1:8000/api/login/";
+
+    const loginForm = document.getElementById("loginForm");
+    const loginBtn = document.getElementById("loginBtn");
+    const message = document.getElementById("message");
+
+
+    function showMessage(text, type) {
+
+        message.textContent = text;
+
+        message.className = "message " + type;
+
+    }
+
+
+    loginForm.addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+        const username =
+            document.getElementById("username").value.trim();
+
+        const password =
+            document.getElementById("password").value;
+
+        const selectedRole =
+            document.getElementById("role").value;
+
+
+        if (!selectedRole) {
+
+            showMessage(
+                "Please select your role.",
+                "error"
+            );
+
+            return;
+        }
+
+
+        loginBtn.disabled = true;
+
+        loginBtn.textContent = "Logging in...";
+
+
+        try {
+
+            const response = await fetch(API_URL, {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    username: username,
+                    password: password
+
+                })
+
+            });
+
+
+            const data = await response.json();
+
+
+            if (!response.ok || !data.success) {
+
+                throw new Error(
+                    data.message || "Invalid username or password."
+                );
+
+            }
+
+
+            /*
+             * Check the ACTUAL role of the account.
+             */
+
+            if (selectedRole !== data.role) {
+
+                throw new Error(
+                    "This account is registered as " +
+                    data.role.toUpperCase() +
+                    ". Please select the correct role."
+                );
+
+            }
+
+
+            /*
+             * Save login information.
+             */
+
+            localStorage.setItem(
+                "busbuddy_username",
+                data.username
+            );
+
+            localStorage.setItem(
+                "busbuddy_role",
+                data.role
+            );
+
+
+            showMessage(
+                "Login successful! Redirecting...",
+                "success"
+            );
+
+
+            /*
+             * Redirect according to actual role.
+             */
+
+            setTimeout(function() {
+
+                if (data.role === "student") {
+
+                    window.location.href =
+                        "student-dashboard.html";
+
+                }
+
+                else if (
+                    data.role === "admin" ||
+                    data.role === "staff"
+                ) {
+
+                    window.location.href =
+                        "staff-dashboard.html";
+
+                }
+
+            }, 700);
+
+
+        }
+
+        catch (error) {
+
+            showMessage(
+                error.message,
+                "error"
+            );
+
+            loginBtn.disabled = false;
+
+            loginBtn.textContent = "Login";
+
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
