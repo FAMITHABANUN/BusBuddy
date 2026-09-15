@@ -1,4 +1,4 @@
-const API_URL = "http://127.0.0.1:8000/api/issues/";
+const API_URL = "https://busbuddy-prmi.onrender.com/api/issues/";
 
 let allIssues = [];
 let editingIssueId = null;
